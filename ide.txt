@@ -1,0 +1,4 @@
+# Ide 
+
+map -> membuat map
+create -> person

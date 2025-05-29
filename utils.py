@@ -18,7 +18,8 @@ def norm(v):  # Vektor normal
 
 
 def normalize(v):
-    return v / norm(v)
+    norm_v = norm(v)
+    return v if norm_v == 0 else v / norm_v
 
 
 def move(pos, target, speed):
@@ -39,5 +40,6 @@ def equal_pos(a, b, tolerance=0.001):
 def time_string(time_in_seconds):
     minutes = time_in_seconds // 60
     seconds = time_in_seconds % 60
-    seconds_string = f"0{seconds:.2f}" if seconds < 10 else f"{seconds:.2f}"
-    return f"{int(minutes)}:{seconds_string}"
+    minutes_string = f"0{minutes}" if minutes < 10 else f"{minutes}"
+    seconds_string = f"0{seconds}" if seconds < 10 else f"{seconds}"
+    return f"{minutes_string}:{seconds_string}"

@@ -24,8 +24,9 @@ def get_boundaries(size=(200, 200), position=(0, 0)):
 
 def create_obstacle(color=RED, size=(200, 150), position=(100, 100)):
     """Create an obstacle at the specified location with the given size and color."""
-    pygame.draw.rect(game.screen, color, (*position, *size))
+    pos = (position[0] - size[0] / 2, position[1] - size[1] / 2)
+    pygame.draw.rect(game.screen, color, (*pos, *size))
     # Update the grid to mark the obstacle's position
     start_x, start_y, end_x, end_y = get_boundaries(
         size=size, position=position)
-    game.grid[start_y:end_y+1, start_x:end_x+1] = -1
+    # game.grid[start_y:end_y+1, start_x:end_x+1] = -1

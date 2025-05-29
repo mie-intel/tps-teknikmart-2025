@@ -10,10 +10,12 @@ class Person:
         self.size = size
         self.color = color
         self.state = "shopping"
-        self.current_target = (0, 0)
+        self.current_target = (utils.random_between(
+            0, SCREEN_SIZE[0]), utils.random_between(0, SCREEN_SIZE[1]))
         # Random shopping time with mean 5 and std dev 2
-        self.shopping_time = utils.random_data(80, 3)  # in seconds
+        self.shopping_time = utils.random_data(200, 50)  # in seconds
         self.transaction_time = utils.random_data(70, 12)
+        print("AGENT SIZE", AGENT_SIZE)
 
         # Create pygame.Rect object for collision detection and positioning
         self.rect = pygame.Rect(
@@ -34,31 +36,40 @@ class Person:
         if self.state == "shopping":
             self.shopping_time -= time_step
             # Update target if reached
-            if utils.equal_pos(self.position, self.current_target):
+            if utils.equal_pos(self.get_center(), self.current_target):
                 self.update_target((utils.random_between(
                     0, SCREEN_SIZE[0]), utils.random_between(0, SCREEN_SIZE[1])))
             if self.shopping_time <= 0:
+                self.state = "queue"
+                self.update_target(game.cashier.get_queue_position())
+        elif self.state == "queue":
+            # Kalo udah sampe posisi, baru masuk antrian
+            if utils.equal_pos(self.get_center(), self.current_target):
+                game.cashier.add_to_queue(self)
                 self.state = "transaction"
-                self.update_target((1, 1))
+            else:
+                self.update_target(game.cashier.get_queue_position())
         elif self.state == "transaction":
             self.transaction_time -= time_step
             if self.transaction_time <= 0:
                 self.state = "done"
         elif self.state == "done":
-            self.update_target((0, 0))
+            # self.update_target((0, 0))
+            pass
 
     def update_target(self, target):
         print(f"Updating target from {self.current_target} to {target}")
         self.current_target = target
-        self.move(target)
 
     def move(self, target):
         """Move the person to absolute position (x, y)."""
-        self.position = utils.move(self.position, target, speed)
+        new_position = utils.move(self.get_center(), target, speed)
+        self.position = (
+            new_position[0] - self.size[0] / 2, new_position[1] - self.size[1] / 2)
 
     def get_center(self):
         """Get the center position of the person."""
-        return self.rect.center
+        return (self.position[0] + self.size[0] / 2, self.position[1] + self.size[1] / 2)
 
     def check_collision(self, other_rect):
         """Check if this person collides with another rectangle."""

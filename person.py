@@ -1,6 +1,7 @@
 import pygame
 from config import *
 import game
+import utils
 
 
 class Person:
@@ -8,11 +9,20 @@ class Person:
         self.position = position
         self.size = size
         self.color = color
+        self.state = "shopping"
+        self.current_target = (0, 0)
+        # Random shopping time with mean 5 and std dev 2
+        self.shopping_time = utils.random_data(80, 3)  # in seconds
+        self.transaction_time = utils.random_data(70, 12)
 
         # Create pygame.Rect object for collision detection and positioning
-        self.rect = pygame.Rect(position[0], position[1], size[0], size[1])
+        self.rect = pygame.Rect(
+            position[0] - AGENT_SIZE / 2, position[1] - AGENT_SIZE / 2, size[0], size[1])
 
-        # Don't draw in __init__, leave that for the draw method
+    def run(self):
+        self.draw()
+        self.update_state()
+        self.move(self.current_target)
 
     def draw(self):
         """Draw the person on the given screen."""
@@ -20,22 +30,31 @@ class Person:
         self.rect.x, self.rect.y = self.position
         pygame.draw.rect(game.screen, self.color, self.rect)
 
-    def move(self, dx, dy):
-        """Move the person by dx, dy pixels."""
-        # Update position
-        new_x = self.position[0] + dx
-        new_y = self.position[1] + dy
-        self.position = (new_x, new_y)
+    def update_state(self):
+        if self.state == "shopping":
+            self.shopping_time -= time_step
+            # Update target if reached
+            if utils.equal_pos(self.position, self.current_target):
+                self.update_target((utils.random_between(
+                    0, SCREEN_SIZE[0]), utils.random_between(0, SCREEN_SIZE[1])))
+            if self.shopping_time <= 0:
+                self.state = "transaction"
+                self.update_target((1, 1))
+        elif self.state == "transaction":
+            self.transaction_time -= time_step
+            if self.transaction_time <= 0:
+                self.state = "done"
+        elif self.state == "done":
+            self.update_target((0, 0))
 
-        # Update rect
-        self.rect.x = new_x
-        self.rect.y = new_y
+    def update_target(self, target):
+        print(f"Updating target from {self.current_target} to {target}")
+        self.current_target = target
+        self.move(target)
 
-    def move_to(self, x, y):
+    def move(self, target):
         """Move the person to absolute position (x, y)."""
-        self.position = (x, y)
-        self.rect.x = x
-        self.rect.y = y
+        self.position = utils.move(self.position, target, speed)
 
     def get_center(self):
         """Get the center position of the person."""

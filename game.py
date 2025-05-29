@@ -3,12 +3,15 @@ import numpy as np
 import pygame
 from config import *
 import sys
+import state
 
 pygame.init()
 pygame.display.set_caption("Simulasi Teknik Mart")
 screen = pygame.display.set_mode(SCREEN_SIZE)
 screen.fill(color.WHITE)
 clock = pygame.time.Clock()
+# mean and standard deviation for random number generation
+data = [[5, 2]]
 
 grid = np.zeros(
     (SCREEN_SIZE[0] // 50, SCREEN_SIZE[1] // 50), dtype=int)
@@ -31,6 +34,8 @@ def run_game():
 def update_game():
     pygame.display.flip()
     clock.tick(FPS)  # Limit to 60 FPS
+    state.ctime += 1
+    print("Current time:", state.ctime)
 
 
 def print_grid():

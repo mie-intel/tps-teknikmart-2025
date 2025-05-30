@@ -1,3 +1,4 @@
+import time
 import pygame
 import color
 import sys
@@ -66,7 +67,7 @@ def update_game():
     global ctime
     pygame.display.flip()
     clock.tick(FPS)  # Limit to 60 FPS
-    ctime += 1
+    ctime += 60 // FPS  # Increment time by 1 second
 
 
 def print_grid():

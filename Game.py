@@ -21,9 +21,6 @@ data = [[5, 2]]
 # Initialize the cashier
 cashier = Cashier()
 
-grid = np.zeros(
-    (SCREEN_SIZE[0] // 50, SCREEN_SIZE[1] // 50), dtype=int)
-
 
 def exit_game():
     pygame.quit()
@@ -68,9 +65,3 @@ def update_game():
     pygame.display.flip()
     clock.tick(FPS)  # Limit to 60 FPS
     ctime += 60 // FPS  # Increment time by 1 second
-
-
-def print_grid():
-    for row in grid:
-        print(" ".join(str(cell) for cell in row))
-    print()  # Print a newline for better readability

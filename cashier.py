@@ -1,16 +1,16 @@
 import map
-from config import cashier_num
+from config import *
 import pygame
 
 
 class Cashier:
     def __init__(self):
-        self.num = cashier_num
+        self.num = CASHIER_NUM
         self.position = []
         self.size = (20, 20)
         self.queue = []
         for i in range(self.num):
-            pos = (200 + i * 60, 100)
+            pos = (200 + i * AGENT_SIZE * 2, 100)
             self.position.append(pos)
             self.queue.append([])
 
@@ -35,11 +35,28 @@ class Cashier:
 
         self.queue[smallest_qid].append(person)
         new_target = (self.position[smallest_qid][0], self.position[smallest_qid]
-                      [1] + 10 + 20 * len(self.queue[smallest_qid]))
+                      [1] + 10 + (AGENT_SIZE + 5) * len(self.queue[smallest_qid]))
         person.update_target(new_target)
+        person.qid = smallest_qid
+        person.qpos = len(self.queue[smallest_qid]) - 1
 
         print(
             f"Person added to queue {smallest_qid} at position {self.position[smallest_qid]} with target {person.current_target}")
+
+    def remove_from_queue(self, person):
+        qid = person.qid
+        if qid is not None and qid < len(self.queue) and person in self.queue[qid]:
+            self.queue[qid].remove(person)
+        # Update the target for the next person in the queue, if any
+
+        for i in range(len(self.queue[qid])):
+            next_target = (
+                self.position[qid][0], self.position[qid][1] + 10 + (AGENT_SIZE + 5) * (i + 1))
+            self.queue[qid][i].update_target(next_target)
+            self.queue[qid][i].status = "update_queue"
+            self.queue[qid][i].qpos = i
+
+        person.update_target((500, 500))
 
     def get_queue_position(self):
         smallest_qid = self.get_smallest_queue_id()

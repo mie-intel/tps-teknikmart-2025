@@ -1,7 +1,8 @@
 import pygame
 from config import *
-import game
+import Game
 import utils
+import state
 
 
 class Person:
@@ -10,8 +11,11 @@ class Person:
         self.size = size
         self.color = color
         self.state = "shopping"
-        self.current_target = (utils.random_between(
-            0, SCREEN_SIZE[0]), utils.random_between(0, SCREEN_SIZE[1]))
+        self.qid = None
+        self.qpos = None
+        self.inside = True
+        # Random target within the room area
+        self.current_target = utils.random_between_room()
         # Random shopping time with mean 5 and std dev 2
         self.shopping_time = utils.random_data(200, 50)  # in seconds
         self.transaction_time = utils.random_data(70, 12)
@@ -30,32 +34,42 @@ class Person:
         """Draw the person on the given screen."""
         # Update rect position to match current position
         self.rect.x, self.rect.y = self.position
-        pygame.draw.rect(game.screen, self.color, self.rect)
+        pygame.draw.rect(Game.screen, self.color, self.rect)
 
     def update_state(self):
         if self.state == "shopping":
-            self.shopping_time -= time_step
+            self.shopping_time -= TIME_STEP
             # Update target if reached
             if utils.equal_pos(self.get_center(), self.current_target):
-                self.update_target((utils.random_between(
-                    0, SCREEN_SIZE[0]), utils.random_between(0, SCREEN_SIZE[1])))
+                self.update_target(utils.random_between_room())
             if self.shopping_time <= 0:
                 self.state = "queue"
-                self.update_target(game.cashier.get_queue_position())
+                self.update_target(Game.cashier.get_queue_position())
         elif self.state == "queue":
             # Kalo udah sampe posisi, baru masuk antrian
             if utils.equal_pos(self.get_center(), self.current_target):
-                game.cashier.add_to_queue(self)
-                self.state = "transaction"
+                Game.cashier.add_to_queue(self)
+                self.state = "update_queue"
             else:
-                self.update_target(game.cashier.get_queue_position())
+                self.update_target(Game.cashier.get_queue_position())
+        elif self.state == "update_queue":
+            # Update target to the next position in the queue
+            if not utils.equal_pos(self.get_center(), self.current_target) and self.qpos == 0:
+                self.state = "transaction"
         elif self.state == "transaction":
-            self.transaction_time -= time_step
+            self.transaction_time -= TIME_STEP
             if self.transaction_time <= 0:
+                self.state = "exit"
+                Game.cashier.remove_from_queue(self)
+        elif self.state == "exit":
+            if utils.equal_pos(self.get_center(), state.door) and self.inside:
+                self.update_target(utils.random_outside_room())
+                self.inside = False
+            elif self.inside:
+                self.update_target(state.door)
+            elif self.inside == False and utils.equal_pos(self.get_center(), self.current_target):
+                print("Person has exited the room.")
                 self.state = "done"
-        elif self.state == "done":
-            # self.update_target((0, 0))
-            pass
 
     def update_target(self, target):
         print(f"Updating target from {self.current_target} to {target}")
@@ -63,7 +77,7 @@ class Person:
 
     def move(self, target):
         """Move the person to absolute position (x, y)."""
-        new_position = utils.move(self.get_center(), target, speed)
+        new_position = utils.move(self.get_center(), target, SPEED)
         self.position = (
             new_position[0] - self.size[0] / 2, new_position[1] - self.size[1] / 2)
 
@@ -74,36 +88,3 @@ class Person:
     def check_collision(self, other_rect):
         """Check if this person collides with another rectangle."""
         return self.rect.colliderect(other_rect)
-
-# Example usage:
-
-
-def example_usage():
-    """Example of how to use the Person class properly."""
-
-    # Create a person
-    player = Person(position=(100, 100), size=(30, 30), color=(0, 255, 0))
-
-    # In your main game loop:
-    while game.running:
-        # Handle events, update game state...
-
-        # Move the person based on input
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.move(-5, 0)
-        if keys[pygame.K_RIGHT]:
-            player.move(5, 0)
-        if keys[pygame.K_UP]:
-            player.move(0, -5)
-        if keys[pygame.K_DOWN]:
-            player.move(0, 5)
-
-        # Clear screen
-        game.screen.fill((255, 255, 255))
-
-        # Draw the person
-        player.draw(game.screen)
-
-        # Update display
-        pygame.display.flip()

@@ -1,10 +1,12 @@
-import color
-import numpy as np
 import pygame
-from config import *
+import color
 import sys
-import state
+import numpy as np
 import utils
+import map
+
+from config import *
+from state import *
 from cashier import Cashier
 
 pygame.init()
@@ -27,7 +29,20 @@ def exit_game():
     sys.exit()
 
 
-def run_game():
+PersonState.init()
+
+
+def run():
+    while True:
+        prep_game()
+        map.create_room()
+        cashier.draw()
+        PersonState.run_all()
+        draw_time()
+        update_game()
+
+
+def prep_game():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit_game()
@@ -37,20 +52,21 @@ def run_game():
 
 
 def draw_time():  # Pass the screen surface as an argument
-    time_string = utils.time_string(state.ctime)
+    time_string = utils.time_string(ctime)
     font = pygame.font.Font(None, 45)  # Font size 18px
     text = font.render(time_string, True, color.WHITE)
     text_width = text.get_width()
-    text_x = 500 - (text_width // 2)
+    text_x = 500 + (text_width)
 
     # Blit text at position (500, 900)
     screen.blit(text, (text_x, 700))
 
 
 def update_game():
+    global ctime
     pygame.display.flip()
     clock.tick(FPS)  # Limit to 60 FPS
-    state.ctime += 1
+    ctime += 1
 
 
 def print_grid():

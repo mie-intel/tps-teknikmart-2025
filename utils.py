@@ -3,6 +3,7 @@ import math
 from config import *
 import state
 import numpy as np
+import json
 
 
 def random_between(l, r):
@@ -42,11 +43,13 @@ def random_between_room():
 
 
 def time_string(time_in_seconds):
-    minutes = time_in_seconds // 60
+    hours = time_in_seconds // 3600
+    minutes = time_in_seconds // 60 - (hours * 60)
     seconds = time_in_seconds % 60
+    hours_string = f"0{hours}" if hours < 10 else f"{hours}"
     minutes_string = f"0{minutes}" if minutes < 10 else f"{minutes}"
     seconds_string = f"0{seconds}" if seconds < 10 else f"{seconds}"
-    return f"{minutes_string}:{seconds_string}"
+    return f"{hours_string}:{minutes_string}:{seconds_string}"
 
 
 def random_outside_room():
@@ -62,3 +65,8 @@ def random_outside_room():
         x = SCREEN_SIZE[0] + AGENT_SIZE
         y = random_between(0, SCREEN_SIZE[1])
     return (x, y)
+
+
+def load_json(filename="output.json"):
+    with open(filename, "r") as f:
+        return json.load(f)

@@ -1,0 +1,254 @@
+[
+  {
+    "time": 0,
+    "people_mean": 1.2,
+    "people_std": 0.7888106377466155,
+    "spend_mean": 91.25,
+    "spend_std": 19.72135436986563,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 1,
+    "people_mean": 1.8,
+    "people_std": 1.6193277068654826,
+    "spend_mean": 115.11111111111111,
+    "spend_std": 24.480217436771962,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 2,
+    "people_mean": 4.4,
+    "people_std": 2.988868236194653,
+    "spend_mean": 142.6590909090909,
+    "spend_std": 67.2686191677496,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 3,
+    "people_mean": 7.2,
+    "people_std": 3.0840089349921005,
+    "spend_mean": 129.15277777777777,
+    "spend_std": 45.56303781257879,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 4,
+    "people_mean": 3.8,
+    "people_std": 1.6865480854231356,
+    "spend_mean": 126.76315789473684,
+    "spend_std": 41.21429443086288,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 5,
+    "people_mean": 4.1,
+    "people_std": 1.8529256146249728,
+    "spend_mean": 109.41463414634147,
+    "spend_std": 37.92293211880912,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 6,
+    "people_mean": 4.2,
+    "people_std": 3.359894178227774,
+    "spend_mean": 103.14285714285714,
+    "spend_std": 19.526806376040778,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 7,
+    "people_mean": 1.2,
+    "people_std": 1.0327955589886446,
+    "spend_mean": 111.25,
+    "spend_std": 35.34794580633043,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 8,
+    "people_mean": 1.4,
+    "people_std": 1.2649110640673518,
+    "spend_mean": 103.42857142857143,
+    "spend_std": 18.698886374550536,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 9,
+    "people_mean": 0.9,
+    "people_std": 0.8755950357709134,
+    "spend_mean": 104.11111111111111,
+    "spend_std": 23.20261000644348,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 10,
+    "people_mean": 0.6,
+    "people_std": 0.5163977794943223,
+    "spend_mean": 74.83333333333333,
+    "spend_std": 9.30412095077588,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 11,
+    "people_mean": 0.8,
+    "people_std": 0.7888106377466155,
+    "spend_mean": 99.375,
+    "spend_std": 39.253525774308294,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 12,
+    "people_mean": 0.6,
+    "people_std": 0.5163977794943222,
+    "spend_mean": 95.16666666666667,
+    "spend_std": 28.561629271921213,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 13,
+    "people_mean": 0.7,
+    "people_std": 0.8232726023485646,
+    "spend_mean": 142.83333333333334,
+    "spend_std": 104.6869937798706,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 14,
+    "people_mean": 2.4,
+    "people_std": 2.9888682361946524,
+    "spend_mean": 105.08333333333333,
+    "spend_std": 66.92950000571118,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 15,
+    "people_mean": 1.6,
+    "people_std": 1.07496769977314,
+    "spend_mean": 95.375,
+    "spend_std": 100.59216337932759,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 16,
+    "people_mean": 1.6,
+    "people_std": 1.429840705968481,
+    "spend_mean": 108.875,
+    "spend_std": 65.84615908818574,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 17,
+    "people_mean": 1.6,
+    "people_std": 2.1186998109427604,
+    "spend_mean": 113.6875,
+    "spend_std": 43.313921934331155,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 18,
+    "people_mean": 2.5,
+    "people_std": 3.3416562759605704,
+    "spend_mean": 113.68,
+    "spend_std": 53.59315876738996,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 19,
+    "people_mean": 2.4,
+    "people_std": 2.633122354417533,
+    "spend_mean": 115.125,
+    "spend_std": 50.377973533989085,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 20,
+    "people_mean": 3.8,
+    "people_std": 1.9888578520235065,
+    "spend_mean": 127.92105263157895,
+    "spend_std": 44.45670932792287,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 21,
+    "people_mean": 2.5,
+    "people_std": 2.3213980461973533,
+    "spend_mean": 117.88,
+    "spend_std": 29.785790795836412,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 22,
+    "people_mean": 5.5,
+    "people_std": 3.24037034920393,
+    "spend_mean": 107.67272727272727,
+    "spend_std": 36.42092120860621,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 23,
+    "people_mean": 4.7,
+    "people_std": 4.2176876234364356,
+    "spend_mean": 122.76595744680851,
+    "spend_std": 52.01137533018407,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 24,
+    "people_mean": 4.8,
+    "people_std": 3.552776691859794,
+    "spend_mean": 115.35416666666667,
+    "spend_std": 31.994340977896844,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 25,
+    "people_mean": 4.6,
+    "people_std": 1.776388345929897,
+    "spend_mean": 110.1086956521739,
+    "spend_std": 28.849978440869716,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 26,
+    "people_mean": 4.0,
+    "people_std": 2.0548046676563256,
+    "spend_mean": 105.675,
+    "spend_std": 26.23697479043356,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  },
+  {
+    "time": 27,
+    "people_mean": 4.222222222222222,
+    "people_std": 2.8625940062196116,
+    "spend_mean": 103.15789473684211,
+    "spend_std": 35.986128195113,
+    "transaction_mean": 21.842105263157894,
+    "transaction_std": 13.602545341445545
+  }
+]

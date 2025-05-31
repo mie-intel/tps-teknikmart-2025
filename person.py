@@ -6,7 +6,7 @@ import state
 
 
 class Person:
-    def __init__(self, position=(0, 0), size=(AGENT_SIZE, AGENT_SIZE), color=(255, 0, 0)):
+    def __init__(self, position=(0, 0), size=(AGENT_SIZE, AGENT_SIZE), color=(255, 0, 0), shopping_time=0, transaction_time=0):
         self.position = position
         self.size = size
         self.color = color
@@ -17,13 +17,17 @@ class Person:
         # Random target within the room area
         self.current_target = utils.random_between_room()
         # Random shopping time with mean 5 and std dev 2
-        self.shopping_time = utils.random_data(200, 50)  # in seconds
-        self.transaction_time = utils.random_data(70, 12)
-        print("AGENT SIZE", AGENT_SIZE)
+        self.shopping_time = utils.random_data(
+            200, 50) if shopping_time == 0 else shopping_time  # in seconds
+        self.transaction_time = utils.random_data(
+            70, 12) if transaction_time == 0 else transaction_time  # in seconds
 
         # Create pygame.Rect object for collision detection and positioning
         self.rect = pygame.Rect(
             position[0] - AGENT_SIZE / 2, position[1] - AGENT_SIZE / 2, size[0], size[1])
+
+        print(
+            f"Created person at {self.position} with shopping time {self.shopping_time} and transaction time {self.transaction_time}")
 
     def run(self):
         self.draw()
@@ -54,7 +58,7 @@ class Person:
                 self.update_target(Game.cashier.get_queue_position())
         elif self.state == "update_queue":
             # Update target to the next position in the queue
-            if not utils.equal_pos(self.get_center(), self.current_target) and self.qpos == 0:
+            if utils.equal_pos(self.get_center(), self.current_target) and self.qpos == 0:
                 self.state = "transaction"
         elif self.state == "transaction":
             self.transaction_time -= TIME_STEP
@@ -68,11 +72,9 @@ class Person:
             elif self.inside:
                 self.update_target(state.door)
             elif self.inside == False and utils.equal_pos(self.get_center(), self.current_target):
-                print("Person has exited the room.")
                 self.state = "done"
 
     def update_target(self, target):
-        print(f"Updating target from {self.current_target} to {target}")
         self.current_target = target
 
     def move(self, target):

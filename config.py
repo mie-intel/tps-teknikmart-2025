@@ -8,4 +8,4 @@ TIME_STEP = 1
 SPEED = AGENT_SIZE / 2  # Speed of the person in pixels per second
 
 # Cashier
-CASHIER_NUM = 4
+CASHIER_NUM = 2

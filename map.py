@@ -35,4 +35,3 @@ def create_room(color=WHITE, door_color=DARKGRAY, p=(0, 0, 500, 800)):
                             (p[2] - WALL_SIZE * 2, (p[1] + p[3]) * 5 / 8, WALL_SIZE * 3, WALL_SIZE * 5))
 
     state.door = door.center
-    print(f"Door position: {state.door}")

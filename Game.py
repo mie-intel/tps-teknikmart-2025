@@ -9,6 +9,7 @@ import map
 from config import *
 from state import *
 from cashier import Cashier
+from datetime import datetime
 
 pygame.init()
 pygame.display.set_caption("Simulasi Teknik Mart")
@@ -37,9 +38,9 @@ PersonState.init()
 def run():
     while True:
         if ctime // 600 >= len(observation_data) and len(PersonState.get_persons()) == 0:
-            print("Simulation finished.")
             simulation_results()
             show_results()
+            print("Simulation finished.")
             break
         prep_game()
         map.create_room()
@@ -88,7 +89,11 @@ def show_results():
     plt.xticks(xticks_to_show, rotation=45)
 
     plt.tight_layout()
-    plt.show()
+
+    now = datetime.now()
+    current_time_str = now.strftime("Simulasi-%H-%M-%d-%m-%Y")
+    print(f"Saving results to ./results/{current_time_str}.png")
+    plt.savefig(f"./results/{current_time_str}.png")
 
 
 def prep_game():

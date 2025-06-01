@@ -57,8 +57,8 @@ def simulation_results():
     avg_max_queue_size = cashier.max_queue_size
     avg_time_spend = [np.mean(t) if t else 0 for t in avg_time_spend]
     avg_max_queue_size = [np.mean(t) if t else 0 for t in avg_max_queue_size]
-    print("Average time spend per minute:", avg_time_spend)
-    print("Average max queue size per minute:", avg_max_queue_size)
+    # print("Average time spend per minute:", avg_time_spend)
+    # print("Average max queue size per minute:", avg_max_queue_size)
 
 
 def show_results():

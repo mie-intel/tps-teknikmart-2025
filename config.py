@@ -4,8 +4,8 @@ AGENT_SIZE = 20
 WALL_SIZE = 10
 
 # Person speed
-TIME_STEP = 4
+TIME_STEP = 1
 SPEED = AGENT_SIZE / 2  # Speed of the person in pixels per second
 
 # Cashier
-CASHIER_NUM = 3
+CASHIER_NUM = 2

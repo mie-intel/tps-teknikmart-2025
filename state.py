@@ -11,12 +11,14 @@ door = None
 
 class PersonState:
     persons = []
+    total_time_spend = [[] for i in range(28)]
 
     @staticmethod
     def init():
         """Initialize the person state with a list of Person objects."""
-        global persons
+        global persons, total_time_spend
         persons = []
+        total_time_spend = [[] for _ in range(28)]
 
     def spawn_person(current_time=0):
         """Spawn a new person at a random position within the room area."""
@@ -41,12 +43,26 @@ class PersonState:
                 transaction_time=transaction_time,
             ))
 
-    @staticmethod
-    def run_all():
+    def get_total_time_spend():
+        """Get the total time spend by all persons."""
+        global total_time_spend
+        return total_time_spend
+
+    def get_persons():
+        """Get the list of persons."""
         global persons
+        return persons
+
+    @staticmethod
+    def run_all(current_time=0):
+        global persons, total_time_spend
         """Update the state of all persons."""
         for person in persons:
             person.run()
 
         # Remove persons that have exited
+        for i in range(len(persons)):
+            if not persons[i].inside:
+                total_time_spend[(current_time - persons[i].total_all_time) // 600].append(
+                    persons[i].total_time)
         persons = [person for person in persons if person.state != "done"]

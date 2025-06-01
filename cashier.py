@@ -9,15 +9,36 @@ class Cashier:
         self.position = []
         self.size = (20, 20)
         self.queue = []
+        self.cur_max_queue_size = 0
+        self.max_queue_size = [[] for _ in range(28)]
         for i in range(self.num):
             pos = (200 + i * AGENT_SIZE * 2, 100)
             self.position.append(pos)
             self.queue.append([])
 
-    def draw(self):
+    def draw(self, ctime):
         # Create Cashier
         for i in range(self.num):
             map.create_obstacle(position=self.position[i], size=self.size)
+        largest_qid = self.get_largest_queue_id()
+        self.cur_max_queue_size = max(
+            self.cur_max_queue_size, len(self.queue[largest_qid]))
+        if ctime % 60 == 0:
+            if ctime // 600 < 28:
+                self.max_queue_size[ctime //
+                                    600].append(self.cur_max_queue_size)
+                self.cur_max_queue_size = 0
+
+    def get_largest_queue_id(self):
+        largest_qid = 0
+        largest_qsize = len(self.queue[0])
+
+        for i in range(self.num):
+            if len(self.queue[i]) > largest_qsize:
+                largest_qsize = len(self.queue[i])
+                largest_qid = i
+
+        return largest_qid
 
     def get_smallest_queue_id(self):
         smallest_qid = 0

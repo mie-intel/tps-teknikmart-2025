@@ -14,6 +14,8 @@ class Person:
         self.qid = None
         self.qpos = None
         self.inside = True
+        self.total_time = 0
+        self.total_all_time = 0
         # Random target within the room area
         self.current_target = utils.random_between_room()
         # Random shopping time with mean 5 and std dev 2
@@ -80,6 +82,10 @@ class Person:
     def move(self, target):
         """Move the person to absolute position (x, y)."""
         new_position = utils.move(self.get_center(), target, SPEED)
+        if self.state != "done" and self.state != "exit":
+            self.total_time += TIME_STEP
+        if self.state != "done":
+            self.total_all_time += TIME_STEP
         self.position = (
             new_position[0] - self.size[0] / 2, new_position[1] - self.size[1] / 2)
 
